@@ -104,8 +104,8 @@
 								${project.basedir}/src/main/resources/openapi/openapi-rest.yml
 							</inputSpec>
 							<generatorName>spring</generatorName>
-							<apiPackage>com.shop.openapi.api</apiPackage>
-							<modelPackage>com.shop.openapi.model</modelPackage>
+							<apiPackage>com.albertoosdev.shop.openapi.api</apiPackage>
+							<modelPackage>com.albertoosdev.shop.openapi.model</modelPackage>
 							<supportingFilesToGenerate>
 								ApiUtil.java
 							</supportingFilesToGenerate>
