@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: Shop
+  description: Módulo para definición de los servicios REST
+  version: 3.0.3
+servers:
+  - url: http://localhost:8080
+    description: LOCAL
+paths:
+  /price:
+    get:
+      operationId: getPriceByParam
+      tags:
+        - Price
+      parameters:
+        - name: applicationDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: productId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: brandId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponseDTO'
+        400:
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+components:
+  schemas:
+    PriceResponseDTO:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+        brandId:
+          type: integer
+          format: int64
+        priceList:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        price:
+          type: number
+          format: double
+    ErrorResponseDTO:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
