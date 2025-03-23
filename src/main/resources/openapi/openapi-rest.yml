@@ -1,17 +1,19 @@
 openapi: 3.0.3
 info:
   title: Shop
-  description: Módulo para definición de los servicios REST
+  description: API for defining REST services for the Shop application.
   version: 3.0.3
 servers:
   - url: http://localhost:8080
-    description: LOCAL
+    description: Local development server
 paths:
   /price:
     get:
       operationId: getPriceByParam
       tags:
         - Price
+      summary: Retrieve price information based on application date, product ID, and brand ID.
+      description: This endpoint retrieves the price information for a given product and brand within a specified date range.
       parameters:
         - name: applicationDate
           in: query
@@ -19,31 +21,53 @@ paths:
           schema:
             type: string
             format: date-time
+          description: The date to check the price validity period.
+          example: "2025-01-01T00:00:00Z"
         - name: productId
           in: query
           required: true
           schema:
             type: integer
             format: int64
+          description: The ID of the product.
+          example: 12345
         - name: brandId
           in: query
           required: true
           schema:
             type: integer
             format: int64
+          description: The ID of the brand.
+          example: 1
       responses:
         200:
-          description: successful operation
+          description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PriceResponseDTO'
+              examples:
+                example-1:
+                  summary: Example response
+                  value:
+                    productId: 12345
+                    brandId: 1
+                    priceList: 1
+                    startDate: "2025-01-01T00:00:00Z"
+                    endDate: "2025-01-31T23:59:59Z"
+                    price: 99.99
         400:
-          description: bad request
+          description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponseDTO'
+              examples:
+                example-1:
+                  summary: Example error response
+                  value:
+                    errorCode: "400"
+                    errorMessage: "Invalid parameters"
         401:
           description: Unauthorized
           content: {}
@@ -61,25 +85,33 @@ components:
         productId:
           type: integer
           format: int64
+          description: The ID of the product.
         brandId:
           type: integer
           format: int64
+          description: The ID of the brand.
         priceList:
           type: integer
           format: int32
+          description: The price list ID.
         startDate:
           type: string
           format: date-time
+          description: The start date of the price validity period.
         endDate:
           type: string
           format: date-time
+          description: The end date of the price validity period.
         price:
           type: number
           format: double
+          description: The price of the product.
     ErrorResponseDTO:
       type: object
       properties:
         errorCode:
           type: string
+          description: The error code.
         errorMessage:
           type: string
+          description: The error message.

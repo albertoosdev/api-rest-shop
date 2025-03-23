@@ -2,21 +2,22 @@ package com.albertoosdev.shop.infrastructure.spring.config;
 
 import com.albertoosdev.shop.domain.port.FindPriceByParamUseCasePort;
 import com.albertoosdev.shop.domain.port.PriceRepositoryPort;
-import com.albertoosdev.shop.usecase.FindPriceByParamUseCase;
+import com.albertoosdev.shop.application.usecase.FindPriceByParamUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * The configuration beans.
+ * Configuration class for setting up use case related beans.
  */
 @Configuration
 public class UseCaseConfig {
 
     /**
-     * Define bean
+     * Creates a FindPriceByParamUseCasePort bean that provides the implementation of the use case
+     * for finding prices by parameters.
      *
-     * @param priceRepositoryPort   priceRepositoryPort
-     * @return the implementation
+     * @param priceRepositoryPort the repository port for accessing price data
+     * @return a FindPriceByParamUseCasePort implementation
      */
     @Bean
     FindPriceByParamUseCasePort findPriceByParamUseCasePort(final PriceRepositoryPort priceRepositoryPort) {

@@ -3,7 +3,7 @@ package com.albertoosdev.shop.infrastructure.controller;
 import com.albertoosdev.shop.domain.model.Price;
 import com.albertoosdev.shop.infrastructure.api.controller.PriceRestController;
 import com.albertoosdev.shop.infrastructure.api.mapper.PriceResponseMapperImpl;
-import com.albertoosdev.shop.usecase.FindPriceByParamUseCase;
+import com.albertoosdev.shop.application.usecase.FindPriceByParamUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

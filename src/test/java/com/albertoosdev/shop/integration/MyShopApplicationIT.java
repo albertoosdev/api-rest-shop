@@ -25,7 +25,7 @@ class MyShopApplicationIT {
 	void givenValidData_whenRequestGet_thenReturnsPriceList_1() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders
 						.get("/price")
-						.queryParam("applicationDate", "2020-06-14T10:00:00Z")
+						.queryParam("applicationDate", "55")
 						.queryParam("productId", "35455")
 						.queryParam("brandId", "1")
 						.accept(MediaType.APPLICATION_JSON))
