@@ -98,6 +98,10 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    curl --location 'http://localhost:8080/price?applicationDate={applicationDate}&productId={productId}&brandId={brandId}' --header 'Accept: application/json'
    ```
+   Example:
+   ```sh
+   curl --location 'http://localhost:8080/price?applicationDate=2020-06-14T10%3A00%3A00Z&productId=35455&brandId=1' --header 'Accept: application/json'
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -2,8 +2,11 @@ package com.albertoosdev.shop.infrastructure.api.handler;
 
 import com.albertoosdev.shop.domain.model.exception.PriceNotFoundException;
 import com.albertoosdev.shop.openapi.model.ErrorResponseDTO;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -53,6 +56,21 @@ public class ShopExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
+                .body(errorResponseDTO);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMissingServletRequestParameter(
+            MissingServletRequestParameterException ex,
+            HttpHeaders headers,
+            HttpStatusCode status,
+            WebRequest request) {
+
+        final var errorResponseDTO = new ErrorResponseDTO();
+        errorResponseDTO.setErrorCode(HttpStatus.BAD_REQUEST.name());
+        errorResponseDTO.setErrorMessage(ex.getLocalizedMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(errorResponseDTO);
     }
 

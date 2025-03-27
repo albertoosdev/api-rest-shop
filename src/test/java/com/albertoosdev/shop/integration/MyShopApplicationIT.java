@@ -25,7 +25,7 @@ class MyShopApplicationIT {
 	void givenValidData_whenRequestGet_thenReturnsPriceList_1() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders
 						.get("/price")
-						.queryParam("applicationDate", "55")
+						.queryParam("applicationDate", "2020-06-14T10:00:00Z")
 						.queryParam("productId", "35455")
 						.queryParam("brandId", "1")
 						.accept(MediaType.APPLICATION_JSON))
@@ -127,6 +127,19 @@ class MyShopApplicationIT {
 		mockMvc.perform(MockMvcRequestBuilders
 						.get("/price")
 						.queryParam("applicationDate", "2020-06-14T10:00:00")
+						.queryParam("productId", "35455")
+						.queryParam("brandId", "1")
+						.accept(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isBadRequest());
+	}
+
+	@Test
+	@DisplayName("Test 8: petición sin parametros obligatorios")
+	void givenInvalidDate_whenRequestGetWithoutRequiredParam_thenReturnsBadRequestError() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders
+						.get("/price")
+//						.queryParam("applicationDate", "2020-06-14T10:00:00")
 						.queryParam("productId", "35455")
 						.queryParam("brandId", "1")
 						.accept(MediaType.APPLICATION_JSON))

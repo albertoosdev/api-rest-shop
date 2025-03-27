@@ -4,7 +4,6 @@ import com.albertoosdev.shop.domain.model.Price;
 import com.albertoosdev.shop.domain.model.exception.PriceNotFoundException;
 import com.albertoosdev.shop.domain.port.FindPriceByParamUseCasePort;
 import com.albertoosdev.shop.domain.port.PriceRepositoryPort;
-import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,12 +46,6 @@ public class FindPriceByParamUseCase implements FindPriceByParamUseCasePort {
                 applicationDate, productId, brandId);
         final var priceList = priceRepositoryPort.findByApplicationDateProductIdAndBrandId(
                 applicationDate, productId, brandId);
-
-        if (ObjectUtils.isEmpty(priceList)) {
-            final var error = String.format(STR_PRICE_NOT_FOUND_ERROR, applicationDate, productId, brandId);
-            LOG.error(error);
-            throw new PriceNotFoundException(error);
-        }
 
         return priceList.stream().max(Comparator.comparing(Price::getPriority))
                 .orElseThrow(() -> new PriceNotFoundException(

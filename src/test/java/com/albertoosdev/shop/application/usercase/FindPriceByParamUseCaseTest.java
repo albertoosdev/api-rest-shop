@@ -88,7 +88,7 @@ class FindPriceByParamUseCaseTest {
                 any(LocalDateTime.class),
                 any(Long.class),
                 any(Long.class)
-        )).thenReturn(null);
+        )).thenReturn(List.of());
 
         final var exception = assertThrows(PriceNotFoundException.class,
                 () -> findPriceByParamUseCase.execute(LocalDateTime.now(), 1L, 1L)
